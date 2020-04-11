@@ -1,0 +1,173 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[UTF8]{ctex}
+\usepackage{booktabs} %三线表需要加载宏包{booktabs}
+\usepackage{diagbox}
+\usepackage{multirow}
+% 斜线表加载宏包{diag}和{multirow}
+
+
+\title{Latex tables}
+\author{li.haor }
+\date{April 2020}
+
+\begin{document}
+
+\maketitle
+
+\section{Basic Table}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{tabular}{cc}%一个c表示有一列，格式为居中显示(center)
+(1,1)&(1,2)\\%第一行第一列和第二列  中间用&连接
+(2,1)&(2,2)\\%第二行第一列和第二列  中间用&连接
+\end{tabular}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{tabular}{|c|c|}% 通过添加 | 来表示是否需要绘制竖线
+\hline  % 在表格最上方绘制横线
+(1,1)&(1,2)\\
+\hline  %在第一行和第二行之间绘制横线
+(2,1)&(2,2)\\
+\hline % 在表格最下方绘制横线
+\end{tabular}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{tabular}{|l|c|r|} %l(left)居左显示 r(right)居右显示 c居中显示
+\hline 
+Name&Steve&Bill\\
+\hline  
+Matlab&Mathmatica&Maple\\
+\hline 
+\end{tabular}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Three line Table}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{tabular}{ccc}
+\hline
+姓名& 学号& 性别\\
+\hline
+Steve Jobs& 001& Male\\
+Bill Gates& 002& Female\\
+\hline
+\end{tabular}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{tabular}{ccc}
+\toprule  %添加表格头部粗线
+姓名& 学号& 性别\\
+\midrule  %添加表格中横线
+Steve Jobs& 001& Male\\
+Bill Gates& 002& Female\\
+\bottomrule %添加表格底部粗线
+\end{tabular}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{table}[!htbp]
+\centering
+\caption{这是一张三线表}\label{tab:aStrangeTable}%添加标题 设置标签
+\begin{tabular}{ccc}
+\toprule
+姓名& 学号& 性别\\
+\midrule
+Steve Jobs& 001& Male\\
+Bill Gates& 002& Female\\
+\bottomrule
+\end{tabular}
+%\caption{这是一张三线表}\label{tab:aStrangeTable}  标题放在这里也是可以的
+\end{table}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{table}[!htbp]
+\centering
+\begin{tabular}{|c|c|c|}
+\hline
+\multicolumn{3}{|c|}{学生信息}\\ % 用\multicolumn{3}表示横向合并三列 
+                        % |c|表示居中并且单元格两侧添加竖线 最后是文本
+\hline
+姓名&学号&性别\\
+\hline
+Jack& 001& Male\\
+\hline
+Angela& 002& Female\\
+\hline
+\end{tabular}
+\caption{这是一张三线表}
+\end{table}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{table}[!htbp]
+\centering
+\begin{tabular}{|c|c|c|c|c|c|c|} %表格7列 全部居中显示
+\hline
+\multicolumn{7}{|c|}{事件}\\  %横向合并7列单元格  两侧添加竖线
+\hline
+\multirow{4}*{策略}&50&0&100&200&300&300\\  %纵向合并4行单元格 
+\cline{2-7}  %为第二列到第七列添加横线
+&100&100&0&100&200&200\\
+\cline{2-7}
+&150&200&100&0&100&200\\
+\cline{2-7}
+&200&300&200&100&0&300\\
+\hline
+\end{tabular}
+\end{table}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{table}[!htbp]
+\centering
+\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline
+
+\multicolumn{2}{|c|}{ \multirow{2}*{$S_i$} }& \multicolumn{4}{c|}{事件} &\multirow{2}*{max}\\
+\cline{3-6}
+\multicolumn{2}{|c|}{}&50&100&150&200&\\
+\hline
+\multirow{4}*{策略}&50&0&100&200&300&300\\
+\cline{2-7}
+&100&100&0&100&200&200\\
+\cline{2-7}
+&150&200&100&0&100&200\\
+\cline{2-7}
+&200&300&200&100&0&300\\
+\hline
+\end{tabular}
+\end{table}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Diagonal Table}
+
+\begin{table}[!htbp]
+\centering
+\begin{tabular}{|c|c|c|c|}
+\hline
+\diagbox{甲}{$\alpha_{i,j}$}{乙}&$\beta_1$&$\beta_2$&$\beta_3$\\ %添加斜线表头
+\hline
+$\alpha_1$&-4&0&-8\\
+\hline
+$\alpha_2$&3&2&4\\
+\hline
+$\alpha_3$&16&1&-9\\
+\hline
+$\alpha_4$&-1&1&7\\
+\hline
+\end{tabular}
+\end{table}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%解决斜线对齐
+%参数\diagbox[innerwidth=2cm](参数大小取决于列宽度)
+\begin{table}[!htbp]
+  \centering
+  \begin{tabular}{|c|c|c|c|c|c|c|}
+   \hline
+   \multicolumn{2}{|c|}{\multirow{2}*{\diagbox[innerwidth=2cm]{$S_i$}{$\lambda_i$}}}& \multicolumn{4}{c|}{事件} &\multirow{2}*{max}\\
+   \cline{3-6}
+   \multicolumn{2}{|c|}{}&50&100&150&200&\\
+   \hline
+   \multirow{4}*{策略}&50&0&100&200&300&300\\
+   \cline{2-7}
+   &100&100&0&100&200&200\\
+   \cline{2-7}
+   &150&200&100&0&100&200\\
+   \cline{2-7}
+   &200&300&200&100&0&300\\
+   \hline
+  \end{tabular}
+ \end{table}
+\end{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}
